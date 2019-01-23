@@ -16,7 +16,9 @@ function [] = simple_1D_electron_simulator()
 % Initialization
 force = 5e-27;
 electron = [0 0]; 
-acceleration = force/C.m_0;
+acceleration1 = force/C.m_0;
+acceleration2 = force/C.m_0;
+acceleration3 = force/C.m_0;
 electron1(1) = 0; %position
 electron1(2) = 0; %velocity
 electron2(1) = 0; %position
@@ -45,26 +47,44 @@ for z = 2:time_steps
     r1 = rand;
     r2 = rand;
     r3 = rand;
+    r11 = rand;
+    r22 = rand;
+    r33 = rand;
     if r1 <= 0.04
+        if r11 <=0.5
+            acceleration1 = acceleration1*1.25;
+        else
+            acceleration1 = acceleration1*0.75;
+        end
         vf1 = 0;
     else
-        vf1 = electron1(2) + acceleration*simTime;
+        vf1 = electron1(2) + acceleration1*simTime;
     end
     xf1 = electron1(1) + vf1*simTime;
     
     
-    if r2 <= 0.05
+    if r2 <= 0.04
+        if r22 <=0.5
+            acceleration2 = acceleration2*1.25;
+        else
+            acceleration2 = acceleration2*0.75;
+        end
         vf2 = 0;
     else
-        vf2 = electron2(2) + acceleration*simTime;
+        vf2 = electron2(2) + acceleration2*simTime;
     end
     xf2 = electron2(1) + vf2*simTime;
     
     
-    if r3 <= 0.1
+    if r3 <= 0.04
+        if r33 <=0.5
+            acceleration3 = acceleration3*1.25;
+        else
+            acceleration3 = acceleration3*0.75;
+        end
         vf3 = 0;
     else
-        vf3 = electron3(2) + acceleration*simTime;
+        vf3 = electron3(2) + acceleration3*simTime;
     end
     xf3 = electron3(1) + vf3*simTime;
 
